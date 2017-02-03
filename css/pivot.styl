@@ -1,10 +1,31 @@
 .pivot-tabs {
+    .pivot-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 10px 0 0 0;
+        padding: 10px 0;
+
+        .pivot-header-title {
+            padding: 0;
+            margin: 0;
+            font-family: inherit;
+        }
+
+        .pivot-header-actions {
+            button, a {
+                padding: 0;
+                margin: 0;
+            }
+        }
+    }
+
     .pivot-tabs-container {
         display:flex;
         flex-direction: row;
         align-content:center;
         clear:both;
-        margin: 0 auto 10px;
+        margin: 10px auto;
         border-bottom: 1px solid #ccc;
         border-top: 1px solid #ccc;
         padding: 15px 0 15px 0;
@@ -16,6 +37,7 @@
             button {
                 background:none;
                 font-size:24px;
+                font-family: inherit;
                 padding:0;
                 margin:0;
                 color: rgba(0,0,0,.6);

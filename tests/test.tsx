@@ -20,8 +20,6 @@ export default class Test extends React.Component<any, IState> {
     private tabs: string[] = [ "First Tab", "Second Tab", "Third Tab" ];
 
     private onChange(tab: Tab) {
-        console.log("Test harness is updating the state to tab", tab.name);
-
         this.setState({selected: tab.name})
     }
 
@@ -31,10 +29,11 @@ export default class Test extends React.Component<any, IState> {
             name: tab,
             selected: selected === tab,
         } as Tab))
+        const actions = <button type="button">{"New Widget"}</button>
 
         return (
             <div>
-                <PivotTabs title="React Win Pivot" tabs={tabs} onChange={tab => this.onChange(tab) }>
+                <PivotTabs title="React Win Pivot" tabs={tabs} actions={actions} onChange={tab => this.onChange(tab) }>
                     <div>
                         <h1>{`This is the ${selected}.`}</h1>
                     </div>
