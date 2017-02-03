@@ -10,7 +10,8 @@
     "build": "npm run tsc && npm run webpack && npm run css",
     "css": "stylus -c --include-css -u autoprefixer-stylus ./css/all.styl -o ./dist",
     "tsc": "tsc -p .",
-    "webpack": "webpack dist/index.js dist/bundled.js && webpack dist/tests/test.js dist/tests/bundled.js"
+    "webpack": "webpack dist/index.js dist/bundled.js && webpack dist/tests/test.js dist/tests/bundled.js",
+    "prepublish": "npm run build"
   },
   "dependencies": {
     "classnames": "^2.2.5",
