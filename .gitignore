@@ -39,3 +39,6 @@ jspm_packages
 # Ignore built files
 dist/
 *.tgz
+
+# Ignore vim's temporary files
+*~
