@@ -83,3 +83,5 @@ export class PivotTabs extends React.Component<IProps, IState>
         );
     }
 }
+
+export default PivotTabs;
