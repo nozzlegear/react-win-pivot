@@ -87,10 +87,12 @@ export class PivotTabs extends React.Component<IProps, IState>
  */
 export function Header(props: HeaderProps) {
     return (
-        <div className="pivot-header">
-            <h3 className="pivot-header-title">{props.title}</h3>
-            <div className="pivot-header-actions">
-                {props.actions}
+        <div className="pivot-tabs">
+            <div className="pivot-header">
+                <h3 className="pivot-header-title">{props.title}</h3>
+                <div className="pivot-header-actions">
+                    {props.actions}
+                </div>
             </div>
         </div>
     )
