@@ -73,6 +73,7 @@ export class PivotTabs extends React.Component<IProps, IState>
                 <div className="pivot-tabs-container">
                     {tabs}
                 </div>
+                <hr className="pivot-spacer"/>
                 { /* Setting the key on the child will get React to always rerender the child with its classes, which will ensure our animation always fires. */}
                 <div className={Classes("pivot-content", animationCss)} key={selected.name}>
                     {this.props.children}
@@ -94,6 +95,7 @@ export function Header(props: HeaderProps) {
                     {props.actions}
                 </div>
             </div>
+            <hr className="pivot-spacer"/>  
         </div>
     )
 }
