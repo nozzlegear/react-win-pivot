@@ -6,10 +6,13 @@ export interface Tab {
     selected: boolean;
 }
 
-export interface IProps extends React.Props<any> {
+export interface IProps extends HeaderProps {
     tabs: Tab[];
-    title: string;
     onChange: (to: Tab) => void;
+}
+
+export interface HeaderProps extends React.Props<any> {
+    title: string;
     actions?: JSX.Element | JSX.Element[];
 }
 
@@ -28,7 +31,7 @@ export class PivotTabs extends React.Component<IProps, IState>
     }
 
     public componentDidMount() {
-        
+
     }
 
     private componentWillReceiveProps(nextProps: IProps) {
@@ -66,22 +69,31 @@ export class PivotTabs extends React.Component<IProps, IState>
 
         return (
             <div className="pivot-tabs">
-                <div className="pivot-header">
-                    <h3 className="pivot-header-title">{this.props.title}</h3>
-                    <div className="pivot-header-actions">
-                        {this.props.actions}
-                    </div>
-                </div>
+                <Header title={this.props.title} actions={this.props.actions} />
                 <div className="pivot-tabs-container">
                     {tabs}
                 </div>
-                { /* Setting the key on the child will get React to always rerender the child with its classes, which will ensure our animation always fires. */ }
+                { /* Setting the key on the child will get React to always rerender the child with its classes, which will ensure our animation always fires. */}
                 <div className={Classes("pivot-content", animationCss)} key={selected.name}>
                     {this.props.children}
                 </div>
             </div>
         );
     }
+}
+
+/**
+ * A Pivot component without the pivoting tabs. Use it to keep a clear theme across your apps, even on pages that don't use the Pivot.
+ */
+export function Header(props: HeaderProps) {
+    return (
+        <div className="pivot-header">
+            <h3 className="pivot-header-title">{props.title}</h3>
+            <div className="pivot-header-actions">
+                {props.actions}
+            </div>
+        </div>
+    )
 }
 
 export default PivotTabs;
