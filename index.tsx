@@ -88,7 +88,7 @@ export class PivotTabs extends React.Component<IProps, IState>
                     component={`div`}
                     runOnMount={true}
                     enter={{opacity: 1, translateX: 0, translateY: 0}}>
-                    <div className={"pivot-content"}>
+                    <div key={`pivot-content`} className={"pivot-content"}>
                         {this.props.children}
                     </div>
                 </Transition>
