@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as Classes from "classnames";
+import Transition, { Transition as ITransition } from "react-motion-ui-pack";
 
 export interface Tab {
     name: string;
@@ -30,8 +31,13 @@ export class PivotTabs extends React.Component<IProps, IState>
         slide_in_from: undefined,
     }
 
-    public componentDidMount() {
+    /**
+     * A flag which tells the render method whether this component has mounted yet, without setting off another render when the value changes.
+     */
+    private hasMounted = false;
 
+    public componentDidMount() {
+        this.hasMounted = true;
     }
 
     private componentWillReceiveProps(nextProps: IProps) {
@@ -61,10 +67,11 @@ export class PivotTabs extends React.Component<IProps, IState>
                 <button onClick={e => this.handleTabClick(e, tab)}>{tab.name}</button>
             </div>
         );
-        const animationCss = {
-            animated: !!this.state.slide_in_from,
-            slideInLeft: this.state.slide_in_from === "Left",
-            slideInRight: this.state.slide_in_from === "Right",
+        const slideInLeft = this.state.slide_in_from === "Left";
+        const appear: ITransition = {
+            opacity: 0,
+            translateX: this.hasMounted ? (slideInLeft ? -250 : 250) : 0,
+            translateY: this.hasMounted ? 0 : 50,
         }
 
         return (
@@ -74,10 +81,17 @@ export class PivotTabs extends React.Component<IProps, IState>
                     {tabs}
                 </div>
                 <hr className="pivot-spacer"/>
-                { /* Setting the key on the child will get React to always rerender the child with its classes, which will ensure our animation always fires. */}
-                <div className={Classes("pivot-content", animationCss)} key={selected.name}>
-                    {this.props.children}
-                </div>
+                { /* Setting the key on the child will get React to always rerender the child, which will ensure our animation always fires. */}
+                <Transition 
+                    key={selected.name}
+                    appear={appear}
+                    component={`div`}
+                    runOnMount={true}
+                    enter={{opacity: 1, translateX: 0, translateY: 0}}>
+                    <div className={"pivot-content"}>
+                        {this.props.children}
+                    </div>
+                </Transition>
             </div>
         );
     }
