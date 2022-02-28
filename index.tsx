@@ -1,117 +1,60 @@
 import * as React from 'react';
-import * as Classes from "classnames";
-import Transition, { Transition as ITransition } from "react-motion-ui-pack";
+import Classes from "classnames";
+import { determineSlideInDirection } from './utils';
 
-export interface Tab {
-    name: string;
-    selected: boolean;
-}
+type Props<T extends string = string> = React.PropsWithChildren<{
+    tabs: T[]
+    selectedTab: T
+    onChange: (newTab: T) => void
+}>
 
-export interface IProps extends HeaderProps {
-    tabs: Tab[];
-    onChange: (to: Tab) => void;
-}
+export function PivotTabs<T extends string = string>(props: Props<T>): JSX.Element { 
+    const contentContainer = React.useRef<HTMLDivElement | null>(null);
+    const previousTabIndex = React.useRef<number | null>(null);
+    const currentTabIndex = props.tabs.indexOf(props.selectedTab);
 
-export interface HeaderProps extends React.Props<any> {
-    title: string;
-    actions?: JSX.Element | JSX.Element[];
-}
+    React.useEffect(() => {
+        if (props.selectedTab && contentContainer.current) {
+            // Determine whether to slide in from left, right or below
+            const slideInFrom = determineSlideInDirection({
+                currentTabIndex, 
+                previousTabIndex: previousTabIndex.current
+            });
 
-export interface IState {
-    slide_in_from: "Left" | "Right";
-}
+            contentContainer.current.classList.add("slide-in-from-" + slideInFrom);
+        }
 
-export class PivotTabs extends React.Component<IProps, IState>
-{
-    constructor(props: IProps) {
-        super(props);
-    }
+        return () => {
+            // The selected tab is changing, save it as the last tab
+            previousTabIndex.current = currentTabIndex;
+        }
+    }, [props.selectedTab, previousTabIndex, contentContainer]);
 
-    public state: IState = {
-        slide_in_from: undefined,
-    }
-
-    /**
-     * A flag which tells the render method whether this component has mounted yet, without setting off another render when the value changes.
-     */
-    private hasMounted = false;
-
-    public componentDidMount() {
-        this.hasMounted = true;
-    }
-
-    private componentWillReceiveProps(nextProps: IProps) {
-        const lastIndex = this.props.tabs.findIndex(tab => !!tab.selected);
-        const newIndex = nextProps.tabs.findIndex(tab => !!tab.selected);
-
-        //If last tab comes after new tab, slide in from right. Else, default to slide in from left.
-        this.setState({
-            slide_in_from: lastIndex < newIndex ? "Right" : "Left"
-        })
-    }
-
-    private handleTabClick(e: React.FormEvent<any>, tab: Tab) {
+    const handleTabClick = (tab: T) => (e: React.FormEvent<any>) => {
         e.preventDefault();
 
-        if (tab.selected) {
-            return;
-        }
+        if (tab === props.selectedTab) return;
 
-        this.props.onChange(tab);
+        props.onChange(tab);
     }
 
-    public render() {
-        const selected = this.props.tabs.find(t => t.selected);
-        const tabs = this.props.tabs.map(tab =>
-            <div key={`pivot-tab-${tab.name}`} className={Classes("pivot-tab", { active: !!tab.selected })}>
-                <button onClick={e => this.handleTabClick(e, tab)}>{tab.name}</button>
-            </div>
-        );
-        const slideInLeft = this.state.slide_in_from === "Left";
-        const appear: ITransition = {
-            opacity: 0,
-            translateX: this.hasMounted ? (slideInLeft ? -250 : 250) : 0,
-            translateY: this.hasMounted ? 0 : 50,
-        }
-
-        return (
-            <div className="pivot-tabs">
-                <Header title={this.props.title} actions={this.props.actions} />
-                <div className="pivot-tabs-container">
-                    {tabs}
-                </div>
-                <hr className="pivot-spacer"/>
-                { /* Setting the key on the child will get React to always rerender the child, which will ensure our animation always fires. */}
-                <Transition 
-                    key={selected.name}
-                    appear={appear}
-                    component={`div`}
-                    runOnMount={true}
-                    enter={{opacity: 1, translateX: 0, translateY: 0}}>
-                    <div key={`pivot-content`} className={"pivot-content"}>
-                        {this.props.children}
-                    </div>
-                </Transition>
-            </div>
-        );
-    }
-}
-
-/**
- * A Pivot component without the pivoting tabs. Use it to keep a clear theme across your apps, even on pages that don't use the Pivot.
- */
-export function Header(props: HeaderProps) {
     return (
         <div className="pivot-tabs">
-            <div className="pivot-header">
-                <h3 className="pivot-header-title">{props.title}</h3>
-                <div className="pivot-header-actions">
-                    {props.actions}
-                </div>
+            <div className="pivot-tabs-container">
+                {props.tabs.map(tab => (
+                    <div key={tab} className={Classes("pivot-tab", { active: props.selectedTab === tab })}>
+                        <button onClick={handleTabClick(tab)}>
+                            {tab}
+                        </button>
+                    </div>
+                ))}
             </div>
-            <hr className="pivot-spacer"/>  
+            <hr className="pivot-spacer"/>
+            <div ref={contentContainer} key={`pivot-content`} className={"pivot-content"}>
+                {props.children}
+            </div>
         </div>
-    )
+    );
 }
 
 export default PivotTabs;

@@ -1,48 +1,29 @@
 import * as React from "react";
 import { render } from "react-dom";
-import { PivotTabs, Tab } from "../";
+import { PivotTabs } from "../index";
 
-export interface IState {
-    selected: string,
-}
+type Tab = "First Tab" | "Second Tab" | "Third Tab";
 
-export default class Test extends React.Component<any, IState> {
-    constructor(props, context) {
-        super(props, context);
+const DEFAULT_TABS: Tab[] = [
+    "First Tab",
+    "Second Tab",
+    "Third Tab",
+]
 
-        this.state = {
-            selected: this.tabs[0]
-        };
-    }
+function TestPage(): JSX.Element {
+    const [selectedTab, setSelectedTab] = React.useState(DEFAULT_TABS[0]);
 
-    public state: IState;
-
-    private tabs: string[] = [ "First Tab", "Second Tab", "Third Tab" ];
-
-    private onChange(tab: Tab) {
-        this.setState({selected: tab.name})
-    }
-
-    public render() {
-        const selected = this.state.selected;
-        const tabs: Tab[] = this.tabs.map(tab => ({
-            name: tab,
-            selected: selected === tab,
-        } as Tab))
-        const actions = <button type="button">{"New Widget"}</button>
-
-        return (
-            <div>
-                <PivotTabs title="React Win Pivot" tabs={tabs} actions={actions} onChange={tab => this.onChange(tab) }>
-                    <div>
-                        <h1>{`This is the ${selected}.`}</h1>
-                    </div>
-                </PivotTabs>
-            </div>
-        )
-    }
+    return (
+        <div>
+            <PivotTabs tabs={DEFAULT_TABS} selectedTab={selectedTab} onChange={setSelectedTab}>
+                <div>
+                    <h1>{`This is the ${selectedTab}.`}</h1>
+                </div>
+            </PivotTabs>
+        </div>
+    )
 }
 
 (function () {
-    render(<Test/>, document.getElementById("contenthost"));
+    render(<TestPage />, document.getElementById("contenthost"));
 }());
