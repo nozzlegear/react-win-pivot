@@ -11,7 +11,7 @@
     "css": "stylus -c --include-css -u autoprefixer-stylus ./css/all.styl -o ./dist",
     "tsc": "tsc -p .",
     "webpack": "webpack dist/index.js dist/bundled.js && webpack dist/tests/test.js dist/tests/bundled.js",
-    "prepublish": "npm run build"
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "classnames": "^2.2.5",
