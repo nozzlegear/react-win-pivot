@@ -9,20 +9,32 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 
     <link rel="stylesheet" href="../dist/all.css" />
+
     <style>
         body {
-            font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+            font-family: Ubuntu,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+            font-size: 1.4rem;
+            margin: 0;
+        }
+        .placeholders {
+            padding-top: 30px;
+            display: grid;
+            grid-template-columns: auto auto auto;
+            grid-column-gap: 3px;
+            justify-content: space-evenly;
+        }
+        .placeholders.placeholder img {
+            max-width: 100%;
         }
     </style>
 </head>
-    <body>
+    <body style="height:2000px">
         <noscript>
             <h1>WARNING: This site requires JavaScript. Please visit <a href="http://www.enable-javascript.com/">this guide</a> to learn how to enable JavaScript on your machine, then reload this page.</h1>
         </noscript>
-        <container id="contenthost"></container>
+        <main id="contenthost"></main>
         <div style="display:none">
-            <script src="../dist/bundled.js"></script>
-            <script src="../dist/tests/bundled.js"></script>
+            <script src="/test.js"></script>
         </div>
     </body>
 </html>
