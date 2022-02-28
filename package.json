@@ -1,5 +1,5 @@
 {
-  "name": "react-win-pivot",
+  "name": "@nozzlegear/react-win-pivot",
   "version": "1.1.1",
   "description": "An attempt to recreate the Pivot element from WinJS in React.",
   "main": "dist/index.js",
