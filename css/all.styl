@@ -14,6 +14,7 @@
     --pivot-tabs-border-width: 0 0 1px 0;
     --pivot-tabs-border-style: solid;
     --pivot-tabs-border-color: #ccc;
+    --pivot-tabs-content-padding: 0;
     --pivot-tabs-slide-in-start-opacity: 0;
     --pivot-tabs-slide-in-end-opacity: 1;
     --pivot-tabs-slide-in-transition: all 0.15s ease-in-out;
@@ -84,6 +85,7 @@
     }
 
     div.pivot-content {
+        padding: var(--pivot-tabs-content-padding);
         opacity: var(--pivot-tabs-slide-in-start-opacity);
 
         &.slide-in-entering {
