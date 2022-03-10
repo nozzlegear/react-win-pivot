@@ -62,7 +62,6 @@ export function PivotTabs<T extends string = string>(props: Props<T>): JSX.Eleme
                     </div>
                 ))}
             </div>
-            <hr className="pivot-spacer"/>
             <div key={currentTabIndex} className={containerClasses}>
                 {props.children}
             </div>

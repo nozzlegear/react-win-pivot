@@ -11,6 +11,9 @@
     --pivot-tabs-active-font-color: #000;
     --pivot-tabs-padding: 10px 20px;
     --pivot-tabs-first-tab-padding-left: 0px;
+    --pivot-tabs-border-width: 0 0 1px 0;
+    --pivot-tabs-border-style: solid;
+    --pivot-tabs-border-color: #ccc;
     --pivot-tabs-slide-in-start-opacity: 0;
     --pivot-tabs-slide-in-end-opacity: 1;
     --pivot-tabs-slide-in-transition: all 0.15s ease-in-out;
@@ -49,6 +52,9 @@
         align-content: center;
         clear: both;
         overflow-x: auto;
+        border-width: var(--pivot-tabs-border-width);
+        border-style: var(--pivot-tabs-border-style);
+        border-color: var(--pivot-tabs-border-color);
         
         div.pivot-tab {
             padding: var(--pivot-tabs-padding);
@@ -75,13 +81,6 @@
                 padding-left: var(--pivot-tabs-first-tab-padding-left);
             }
         }    
-    }
-
-    hr.pivot-spacer {
-        width: 100%;
-        border: 0;
-        border-bottom: 1px solid #ccc;
-        margin: 10px auto;
     }
 
     div.pivot-content {
