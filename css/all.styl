@@ -1,14 +1,34 @@
 .pivot-tabs {
+    --pivot-tabs-header-padding: 20px 0 10px 0;
+    --pivot-tabs-justify-content: space-between;
+    --pivot-tabs-title-padding: 0;
+    --pivot-tabs-title-margin: 0;
+    --pivot-tabs-title-font-family: inherit;
+
+    --pivot-tabs-font-family: inherit;
+    --pivot-tabs-font-size: 24px;
+    --pivot-tabs-font-color: rgba(0,0,0,.6);
+    --pivot-tabs-active-font-color: #000;
+    --pivot-tabs-padding: 10px 20px;
+    --pivot-tabs-first-tab-padding-left: 0px;
+    --pivot-tabs-slide-in-start-opacity: 0;
+    --pivot-tabs-slide-in-end-opacity: 1;
+    --pivot-tabs-slide-in-transition: all 0.15s ease-in-out;
+    --pivot-tabs-slide-in-transform: translate(0, 0);
+    --pivot-tabs-slide-in-from-left-transform: translate(-150px, 0px);
+    --pivot-tabs-slide-in-from-right-transform: translate(150px, 0px);
+    --pivot-tabs-slide-in-from-below-transform: translate(0px, 150px);
+
     .pivot-header {
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        padding: 20px 0 10px 0;
+        justify-content: var(--pivot-tabs-justify-content)
+        padding: var(--pivot-tabs-header-padding)
 
         .pivot-header-title {
-            padding: 0;
-            margin: 0;
-            font-family: inherit;
+            padding: var(--pivot-tabs-title-padding);
+            margin: var(--pivot-tabs-title-margin);
+            font-family: var(--pivot-tabs-title-font-family);
             line-height: 1;
         }
 
@@ -26,33 +46,33 @@
     .pivot-tabs-container {
         display:flex;
         flex-direction: row;
-        align-content:center;
-        clear:both;
-        overflow-x:auto;
+        align-content: center;
+        clear: both;
+        overflow-x: auto;
         
         div.pivot-tab {
-            padding: 10px 20px;
+            padding: var(--pivot-tabs-padding);
             
             button {
+                font-size: var(--pivot-tabs-font-size);
+                font-family: var(--pivot-tabs-font-family);
+                color: var(--pivot-tabs-font-color);
                 background:none;
-                font-size:24px;
-                font-family: inherit;
-                padding:0;
-                margin:0;
-                color: rgba(0,0,0,.6);
-                border:none;
-                box-shadow:none;
+                padding: 0;
+                margin: 0;
+                border: none;
+                box-shadow: none;
                 cursor: pointer;
             }
             
             &.active {
                 button {
-                    color:#000;
+                    color: var(--pivot-tabs-active-font-color);
                 }
             }
             
             &:first-child {
-                padding-left:0;
+                padding-left: var(--pivot-tabs-first-tab-padding-left);
             }
         }    
     }
@@ -65,26 +85,26 @@
     }
 
     div.pivot-content {
-        opacity: 0
+        opacity: var(--pivot-tabs-slide-in-start-opacity);
 
         &.slide-in-entering {
             &.slide-in-from-left {
-                transform: translate(-150px, 0px)
+                transform: var(--pivot-tabs-slide-in-from-left-transform);
             }
 
             &.slide-in-from-right {
-                transform: translate(150px, 0px)
+                transform: var(--pivot-tabs-slide-in-from-right-transform);
             }
 
             &.slide-in-from-below {
-                transform: translate(0px, 150px)
+                transform: var(--pivot-tabs-slide-in-from-below-transform);
             }
         }
 
         &.slide-in-entered {
-            transition: all 0.15s ease-in-out;
-            transform: translate(0, 0)
-            opacity: 1
+            transition: var(--pivot-tabs-slide-in-transition);
+            transform: var(--pivot-tabs-slide-in-transform);
+            opacity: var(--pivot-tabs-slide-in-end-opacity);
         }
     }
 }
