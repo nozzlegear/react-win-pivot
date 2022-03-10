@@ -66,21 +66,25 @@
 
     div.pivot-content {
         opacity: 0
-        transition: all 0.5s ease-in-out;
 
-        &.slide-in-from-left {
-            opacity: 1
-            transform: translate(-250, 0)
+        &.slide-in-entering {
+            &.slide-in-from-left {
+                transform: translate(-150px, 0px)
+            }
+
+            &.slide-in-from-right {
+                transform: translate(150px, 0px)
+            }
+
+            &.slide-in-from-below {
+                transform: translate(0px, 150px)
+            }
         }
 
-        &.slide-in-from-right {
+        &.slide-in-entered {
+            transition: all 0.15s ease-in-out;
+            transform: translate(0, 0)
             opacity: 1
-            transform: translate(250, 0)
-        }
-
-        &.slide-in-from-below {
-            opacity: 1
-            transform: translate(0, 250)
         }
     }
 }
