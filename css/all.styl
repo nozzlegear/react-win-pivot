@@ -1,10 +1,4 @@
 .pivot-tabs {
-    --pivot-tabs-header-padding: 20px 0 10px 0;
-    --pivot-tabs-justify-content: space-between;
-    --pivot-tabs-title-padding: 0;
-    --pivot-tabs-title-margin: 0;
-    --pivot-tabs-title-font-family: inherit;
-
     --pivot-tabs-font-family: inherit;
     --pivot-tabs-font-size: 24px;
     --pivot-tabs-font-color: rgba(0,0,0,.6);
@@ -22,30 +16,6 @@
     --pivot-tabs-slide-in-from-left-transform: translate(-150px, 0px);
     --pivot-tabs-slide-in-from-right-transform: translate(150px, 0px);
     --pivot-tabs-slide-in-from-below-transform: translate(0px, 150px);
-
-    .pivot-header {
-        display: flex;
-        align-items: center;
-        justify-content: var(--pivot-tabs-justify-content)
-        padding: var(--pivot-tabs-header-padding)
-
-        .pivot-header-title {
-            padding: var(--pivot-tabs-title-padding);
-            margin: var(--pivot-tabs-title-margin);
-            font-family: var(--pivot-tabs-title-font-family);
-            line-height: 1;
-        }
-
-        .pivot-header-actions {
-            a, button {
-                margin-right: 10px;
-
-                &:last-child {
-                    margin-right: 0;
-                }
-            }
-        }
-    }
 
     .pivot-tabs-container {
         display:flex;
