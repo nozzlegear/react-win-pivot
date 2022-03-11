@@ -3,7 +3,16 @@ import Classes from "classnames";
 import { determineSlideInDirection } from './utils';
 import { useTransitionControl } from "./hooks";
 
-type Props<T extends string = string> = React.PropsWithChildren<{
+type AnimatedProps = {
+    animate: true
+    animationDuration?: number
+}
+
+type UnanimatedProps = {
+    animate: false
+}
+
+type Props<T extends string = string> = (AnimatedProps | UnanimatedProps) & React.PropsWithChildren<{
     tabs: T[]
     selectedTab: T
     onChange: (newTab: T) => void
@@ -12,7 +21,7 @@ type Props<T extends string = string> = React.PropsWithChildren<{
 export function PivotTabs<T extends string = string>(props: Props<T>): JSX.Element { 
     const previousTabIndex = React.useRef<number | null>(null);
     const currentTabIndex = props.tabs.indexOf(props.selectedTab);
-    const [transitionState, enter, reset] = useTransitionControl(200);
+    const [transitionState, enter, reset] = useTransitionControl(props.animate && props.animationDuration || 200);
 
     // Determine whether to slide in from left, right or below
     const slideInFrom = React.useMemo(() => determineSlideInDirection({
@@ -44,6 +53,7 @@ export function PivotTabs<T extends string = string>(props: Props<T>): JSX.Eleme
 
     // Build the list of classes for the content container, based on which direction to slide in from 
     const containerClasses = Classes("pivot-content", {
+        "slide-in-animated": props.animate === true,
         "slide-in-from-below": slideInFrom === "below",
         "slide-in-from-right": slideInFrom === "right",
         "slide-in-from-left": slideInFrom === "left",

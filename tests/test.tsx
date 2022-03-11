@@ -15,7 +15,7 @@ function TestPage(): JSX.Element {
 
     return (
         <div>
-            <PivotTabs tabs={DEFAULT_TABS} selectedTab={selectedTab} onChange={setSelectedTab}>
+            <PivotTabs animate={true} tabs={DEFAULT_TABS} selectedTab={selectedTab} onChange={setSelectedTab}>
                 <div>
                     <h1>{`This is the ${selectedTab}.`}</h1>
                 </div>
