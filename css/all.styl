@@ -3,8 +3,7 @@
     --pivot-tabs-font-size: 24px;
     --pivot-tabs-font-color: rgba(0,0,0,.6);
     --pivot-tabs-active-font-color: #000;
-    --pivot-tabs-padding: 10px 0;
-    --pivot-tabs-first-tab-padding-left: 0px;
+    --pivot-tabs-padding: 20px 20px 20px 0; 
     --pivot-tabs-column-gap: 20px;
     --pivot-tabs-border-width: 0 0 1px 0;
     --pivot-tabs-border-style: solid;
@@ -22,16 +21,14 @@
         display:flex;
         flex-direction: row;
         align-content: center;
-        column-gap: var(--pivot-tabs-column-gap)
+        padding: var(--pivot-tabs-padding);
+        column-gap: var(--pivot-tabs-column-gap);
         border-width: var(--pivot-tabs-border-width);
         border-style: var(--pivot-tabs-border-style);
         border-color: var(--pivot-tabs-border-color);
-        clear: both;
         overflow-x: auto;
         
         div.pivot-tab {
-            padding: var(--pivot-tabs-padding);
-            
             button {
                 font-size: var(--pivot-tabs-font-size);
                 font-family: var(--pivot-tabs-font-family);
