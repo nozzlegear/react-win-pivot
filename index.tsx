@@ -62,10 +62,10 @@ export function Pivot<T extends string = string>(props: Props<T>): JSX.Element {
     });
 
     return (
-        <div className="pivot-tabs">
-            <div className="pivot-tabs-container">
+        <div className="react-win-pivot">
+            <div className="react-win-pivot-tabs-container">
                 {props.tabs.map(tab => (
-                    <div key={tab} className={Classes("pivot-tab", { active: props.selectedTab === tab })}>
+                    <div key={tab} className={Classes("react-win-pivot-tab", { active: props.selectedTab === tab })}>
                         <button onClick={handleTabClick(tab)}>
                             {tab}
                         </button>
