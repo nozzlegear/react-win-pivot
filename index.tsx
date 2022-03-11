@@ -12,7 +12,7 @@ type Props<T extends string = string> = React.PropsWithChildren<{
 export function PivotTabs<T extends string = string>(props: Props<T>): JSX.Element { 
     const previousTabIndex = React.useRef<number | null>(null);
     const currentTabIndex = props.tabs.indexOf(props.selectedTab);
-    const [transitionState, enter, reset] = useTransitionControl(400);
+    const [transitionState, enter, reset] = useTransitionControl(200);
 
     // Determine whether to slide in from left, right or below
     const slideInFrom = React.useMemo(() => determineSlideInDirection({
