@@ -10,7 +10,7 @@
   "scripts": {
     "build": "yarn run validate && yarn run build:ts && yarn run build:css",
     "build:css": "stylus -c --include-css -o ./dist ./css/all.styl",
-    "build:ts": "esbuild --outdir=dist --sourcemap index.tsx && tsc --emitDeclarationOnly",
+    "build:ts": "esbuild --outdir=dist --sourcemap index.tsx utils.ts hooks.ts && tsc --emitDeclarationOnly",
     "test": "yarn build && yarn esbuild --bundle --serve=localhost:5000 --servedir=. tests/test.tsx",
     "validate": "tsc -p . --skipLibCheck --noEmit",
     "prepublishOnly": "npm run build"
