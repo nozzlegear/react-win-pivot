@@ -18,7 +18,7 @@ type Props<T extends string = string> = (AnimatedProps | UnanimatedProps) & Reac
     onChange: (newTab: T) => void
 }>
 
-export function PivotTabs<T extends string = string>(props: Props<T>): JSX.Element { 
+export function Pivot<T extends string = string>(props: Props<T>): JSX.Element { 
     const previousTabIndex = React.useRef<number | null>(null);
     const currentTabIndex = props.tabs.indexOf(props.selectedTab);
     const [transitionState, enter, reset] = useTransitionControl(props.animate && props.animationDuration || 200);
@@ -79,4 +79,4 @@ export function PivotTabs<T extends string = string>(props: Props<T>): JSX.Eleme
     );
 }
 
-export default PivotTabs;
+export default Pivot;
