@@ -14,7 +14,9 @@
     "build:ts": "esbuild --outdir=dist --sourcemap index.tsx utils.ts hooks.ts && tsc --emitDeclarationOnly",
     "test": "npm run build && npm run esbuild --bundle --serve=localhost:5000 --servedir=. tests/test.tsx",
     "validate": "tsc -p . --skipLibCheck --noEmit",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run lint && npm run build",
+    "format": "biome format --write index.tsx tests/* css/*",
+    "lint": "biome lint --write index.tsx tests/* css/* && npm run validate"
   },
   "dependencies": {
     "classnames": "^2.3.1",
@@ -23,6 +25,7 @@
   "devDependencies": {
     "@types/react": "^17.0.40",
     "@types/react-dom": "^17.0.13",
+    "@biomejs/biome": "^2.2.7",
     "esbuild": "^0.14.25",
     "react-dom": "^17.0.2",
     "stylus": "^0.56.0",
