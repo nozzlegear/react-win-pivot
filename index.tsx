@@ -1,33 +1,38 @@
-import * as React from 'react';
+import * as React from "react";
 import Classes from "classnames";
-import { determineSlideInDirection } from './utils';
+import { determineSlideInDirection } from "./utils";
 import { useTransitionControl } from "./hooks";
 
 type AnimatedProps = {
-    animate: true
-    animationDuration?: number
-}
+    animate: true;
+    animationDuration?: number;
+};
 
 type UnanimatedProps = {
-    animate: false
-}
+    animate: false;
+};
 
-type Props<T extends string = string> = (AnimatedProps | UnanimatedProps) & React.PropsWithChildren<{
-    tabs: T[]
-    selectedTab: T
-    onChange: (newTab: T) => void
-}>
+type Props<T extends string = string> = (AnimatedProps | UnanimatedProps) &
+    React.PropsWithChildren<{
+        tabs: T[];
+        selectedTab: T;
+        onChange: (newTab: T) => void;
+    }>;
 
 export function Pivot<T extends string = string>(props: Props<T>): React.JSX.Element {
     const previousTabIndex = React.useRef<number | null>(null);
     const currentTabIndex = props.tabs.indexOf(props.selectedTab);
-    const [transitionState, enter, reset] = useTransitionControl(props.animate && props.animationDuration || 200);
+    const [transitionState, enter, reset] = useTransitionControl((props.animate && props.animationDuration) || 200);
 
     // Determine whether to slide in from left, right or below
-    const slideInFrom = React.useMemo(() => determineSlideInDirection({
-            currentTabIndex,
-            previousTabIndex: previousTabIndex.current
-    }), [currentTabIndex]);
+    const slideInFrom = React.useMemo(
+        () =>
+            determineSlideInDirection({
+                currentTabIndex,
+                previousTabIndex: previousTabIndex.current,
+            }),
+        [currentTabIndex],
+    );
 
     // Use an effect to reset the transition state and store the previous tab index whenever the selected tab changes
     React.useEffect(() => {
@@ -40,7 +45,7 @@ export function Pivot<T extends string = string>(props: Props<T>): React.JSX.Ele
 
         return () => {
             reset();
-        }
+        };
     }, [enter, reset]);
 
     const handleTabClick = (tab: T) => (e: React.FormEvent) => {
@@ -49,7 +54,7 @@ export function Pivot<T extends string = string>(props: Props<T>): React.JSX.Ele
         if (tab === props.selectedTab) return;
 
         props.onChange(tab);
-    }
+    };
 
     // Build the list of classes for the content container, based on which direction to slide in from
     const containerClasses = Classes("pivot-content", {
@@ -58,13 +63,13 @@ export function Pivot<T extends string = string>(props: Props<T>): React.JSX.Ele
         "slide-in-from-right": slideInFrom === "right",
         "slide-in-from-left": slideInFrom === "left",
         "slide-in-entering": transitionState === "entering",
-        "slide-in-entered": transitionState === "entered"
+        "slide-in-entered": transitionState === "entered",
     });
 
     return (
         <div className="react-win-pivot">
             <div className="react-win-pivot-tabs-container">
-                {props.tabs.map(tab => (
+                {props.tabs.map((tab) => (
                     <div key={tab} className={Classes("react-win-pivot-tab", { active: props.selectedTab === tab })}>
                         <button type="button" onClick={handleTabClick(tab)}>
                             {tab}

@@ -1,7 +1,7 @@
 .react-win-pivot {
     --pivot-tabs-font-family: inherit;
     --pivot-tabs-font-size: 24px;
-    --pivot-tabs-font-color: rgba(0,0,0,.6);
+    --pivot-tabs-font-color: rgba(0, 0, 0, 0.6);
     --pivot-tabs-active-font-color: #000;
     --pivot-tabs-padding: 20px 20px 20px 0;
     --pivot-tabs-column-gap: 20px;

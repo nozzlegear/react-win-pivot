@@ -4,11 +4,7 @@ import { Pivot } from "../index";
 
 type Tab = "First Tab" | "Second Tab" | "Third Tab";
 
-const DEFAULT_TABS: Tab[] = [
-    "First Tab",
-    "Second Tab",
-    "Third Tab",
-]
+const DEFAULT_TABS: Tab[] = ["First Tab", "Second Tab", "Third Tab"];
 
 function TestPage(): React.JSX.Element {
     const [selectedTab, setSelectedTab] = React.useState(DEFAULT_TABS[0]);
@@ -19,10 +15,10 @@ function TestPage(): React.JSX.Element {
                 <h1>{`This is the ${selectedTab}.`}</h1>
             </div>
         </Pivot>
-    )
+    );
 }
 
-((() => {
+(() => {
     const root = createRoot(document.getElementById("contenthost")!);
     root.render(<TestPage />);
-})());
+})();
