@@ -1,5 +1,5 @@
 import * as React from "react";
-import { render } from "react-dom";
+import { createRoot } from "react-dom/client";
 import { Pivot } from "../index";
 
 type Tab = "First Tab" | "Second Tab" | "Third Tab";
@@ -10,7 +10,7 @@ const DEFAULT_TABS: Tab[] = [
     "Third Tab",
 ]
 
-function TestPage(): JSX.Element {
+function TestPage(): React.JSX.Element {
     const [selectedTab, setSelectedTab] = React.useState(DEFAULT_TABS[0]);
 
     return (
@@ -23,5 +23,6 @@ function TestPage(): JSX.Element {
 }
 
 ((() => {
-    render(<TestPage />, document.getElementById("contenthost"));
+    const root = createRoot(document.getElementById("contenthost")!);
+    root.render(<TestPage />);
 })());
