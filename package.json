@@ -1,6 +1,6 @@
 {
   "name": "@nozzlegear/react-win-pivot",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "An attempt to recreate the Pivot element from WinJS in React.",
   "repository": "git@github.com:nozzlegear/react-win-pivot.git",
   "author": "Joshua Harms <joshua@nozzlegear.com>",
