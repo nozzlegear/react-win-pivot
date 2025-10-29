@@ -3,7 +3,7 @@ import * as React from "react";
 type TransitionState = "entering" | "entered" | null;
 
 type TransitionStateTuple = [
-    state: TransitionState, 
+    state: TransitionState,
     setState: (newState: TransitionState) => void
 ];
 
@@ -36,12 +36,12 @@ export function useTransitionState(duration = 1000): TransitionStateTuple {
 export function useTransitionControl(duration: number): TransitionControlTuple {
     const [state, setState] = useTransitionState(duration);
 
-    const enter = () => {
+    const enter = React.useCallback(() => {
         setState("entering");
-    }
-    const reset = () => {
+    }, []);
+    const reset = React.useCallback(() => {
         setState(null);
-    }
+    }, []);
 
     return [state, enter, reset];
 }
