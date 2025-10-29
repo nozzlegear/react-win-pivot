@@ -22,6 +22,6 @@ function TestPage(): JSX.Element {
     )
 }
 
-(function () {
+((() => {
     render(<TestPage />, document.getElementById("contenthost"));
-}());
+})());
