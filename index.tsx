@@ -83,5 +83,3 @@ export function Pivot<T extends string = string>(props: Props<T>): React.JSX.Ele
         </div>
     );
 }
-
-export default Pivot;
