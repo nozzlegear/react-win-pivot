@@ -1,0 +1,80 @@
+.react-win-pivot {
+    --pivot-tabs-font-family: inherit;
+    --pivot-tabs-font-size: 24px;
+    --pivot-tabs-font-color: rgba(0,0,0,.6);
+    --pivot-tabs-active-font-color: #000;
+    --pivot-tabs-padding: 20px 20px 20px 0;
+    --pivot-tabs-column-gap: 20px;
+    --pivot-tabs-border-width: 0 0 1px 0;
+    --pivot-tabs-border-style: solid;
+    --pivot-tabs-border-color: #ccc;
+    --pivot-tabs-content-padding: 0;
+    --pivot-tabs-slide-in-start-opacity: 0;
+    --pivot-tabs-slide-in-end-opacity: 1;
+    --pivot-tabs-slide-in-transition: all 0.1s ease-in-out;
+    --pivot-tabs-slide-in-transform: translate(0, 0);
+    --pivot-tabs-slide-in-from-left-transform: translate(-100px, 0px);
+    --pivot-tabs-slide-in-from-right-transform: translate(100px, 0px);
+    --pivot-tabs-slide-in-from-below-transform: translate(0px, 100px);
+
+    .react-win-pivot-tabs-container {
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        padding: var(--pivot-tabs-padding);
+        column-gap: var(--pivot-tabs-column-gap);
+        border-width: var(--pivot-tabs-border-width);
+        border-style: var(--pivot-tabs-border-style);
+        border-color: var(--pivot-tabs-border-color);
+        overflow-x: auto;
+
+        div.react-win-pivot-tab {
+            button {
+                font-size: var(--pivot-tabs-font-size);
+                font-family: var(--pivot-tabs-font-family);
+                color: var(--pivot-tabs-font-color);
+                background: none;
+                padding: 0;
+                margin: 0;
+                border: none;
+                box-shadow: none;
+                cursor: pointer;
+            }
+
+            &.active {
+                button {
+                    color: var(--pivot-tabs-active-font-color);
+                }
+            }
+
+            &:first-child {
+                padding-left: var(--pivot-tabs-first-tab-padding-left);
+            }
+        }
+    }
+
+    div.pivot-content.slide-in-animated {
+        padding: var(--pivot-tabs-content-padding);
+        opacity: var(--pivot-tabs-slide-in-start-opacity);
+
+        &.slide-in-entering {
+            &.slide-in-from-left {
+                transform: var(--pivot-tabs-slide-in-from-left-transform);
+            }
+
+            &.slide-in-from-right {
+                transform: var(--pivot-tabs-slide-in-from-right-transform);
+            }
+
+            &.slide-in-from-below {
+                transform: var(--pivot-tabs-slide-in-from-below-transform);
+            }
+        }
+
+        &.slide-in-entered {
+            transition: var(--pivot-tabs-slide-in-transition);
+            transform: var(--pivot-tabs-slide-in-transform);
+            opacity: var(--pivot-tabs-slide-in-end-opacity);
+        }
+    }
+}
