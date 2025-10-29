@@ -23,7 +23,7 @@
     "css"
   ],
   "scripts": {
-    "build": "npm run lint && vite build",
+    "build": "npm run validate && NODE_ENV=production vite build",
     "dev": "vite dev .",
     "validate": "tsc -p . --skipLibCheck --noEmit",
     "prepublishOnly": "npm run lint && npm run build",
